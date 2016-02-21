@@ -286,32 +286,32 @@ if [ "${perform_clone}" == "1" ]; then
         echo Changing directory to `dirname $src` for installing  ...
         cd `dirname $src`
 
-        git clone http://llvm.org/git/llvm.git `basename $src`
+        git clone --depth 1 http://llvm.org/git/llvm.git `basename $src`
 
-        ( cd $src/tools && git clone http://llvm.org/git/clang.git )
-        ( cd $src/projects && git clone http://llvm.org/git/libcxx )
-        ( cd $src/projects && git clone http://llvm.org/git/compiler-rt )
+        ( cd $src/tools && git clone --depth 1 http://llvm.org/git/clang.git )
+        ( cd $src/projects && git clone --depth 1 http://llvm.org/git/libcxx )
+        ( cd $src/projects && git clone --depth 1 http://llvm.org/git/compiler-rt )
 
         ( cd $src && git checkout -q ${version_llvm} )
         ( cd $src/tools/clang && git checkout -q ${version_clang}  )
         ( cd ${src_libcxx} && git checkout -q ${version_libcxx} )
         ( cd ${src_compilerrt} && git checkout -q ${version_compilerrt} )
 
-        ( cd $src/projects && git clone http://llvm.org/git/libcxxabi )
+        ( cd $src/projects && git clone --depth 1 http://llvm.org/git/libcxxabi )
         ( cd ${src_libcxxabi} && git checkout -q ${version_libcxxabi} )
 
         if [ "${perform_extra_build}" == "1" ]; then
-            ( cd $src/tools && git clone http://llvm.org/git/clang-tools-extra.git extra )
+            ( cd $src/tools && git clone --depth 1 http://llvm.org/git/clang-tools-extra.git extra )
             ( cd $src/tools/extra && git checkout -q ${version_extra} )
         fi
 
         if [ "${perform_lldb_build}" == "1" ]; then
-            ( cd `dirname ${src_lldb}` && git clone http://llvm.org/git/lldb `basename ${src_lldb}`)
+            ( cd `dirname ${src_lldb}` && git clone --depth 1 http://llvm.org/git/lldb `basename ${src_lldb}`)
             ( cd ${src_lldb} && git checkout -q ${version_lldb}  )
         fi
 
         if [ "${perform_lld_build}" == "1" ]; then
-            ( cd `dirname ${src_lld}` && git clone http://llvm.org/git/lld `basename ${src_lld}`)
+            ( cd `dirname ${src_lld}` && git clone --depth 1 http://llvm.org/git/lld `basename ${src_lld}`)
             ( cd ${src_lld} && git checkout -q ${version_lld}  )
         fi
 
