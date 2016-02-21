@@ -1,6 +1,6 @@
 
 FROM        ubuntu:trusty
-MAINTAINER  Robin Sommer <robin@icir.org>
+MAINTAINER  Kevin Chen <k_@berkeley.edu>
 
 # Setup environment.
 ENV PATH /opt/llvm/bin:$PATH
@@ -16,6 +16,6 @@ ADD . /opt/install-clang
 
 # Compile and install LLVM/clang. We delete the source directory to
 # avoid committing it to the image.
-RUN /opt/install-clang/install-clang -j 4 -C /opt/llvm
+RUN /opt/install-clang/install-clang -m -j 4 -C /opt/llvm
 
 
